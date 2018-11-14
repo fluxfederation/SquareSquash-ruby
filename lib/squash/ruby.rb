@@ -11,6 +11,8 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
+#
+# Addition to the file Copyright 2018 FluxFederation.com
 
 require 'yaml'
 require 'socket'
@@ -47,8 +49,12 @@ module Squash
     }
     # Types that are serialized directly to JSON, rather than to a hash of
     # object information. Subclasses are not considered members of this array.
-    JSON_NATIVE_TYPES        = [String, NilClass, TrueClass, FalseClass, Integer,
-                                Float]
+    if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('2.4.0')
+      JSON_NATIVE_TYPES = [String, NilClass, TrueClass, FalseClass, Fixnum, Float].freeze
+    else
+      JSON_NATIVE_TYPES = [String, NilClass, TrueClass, FalseClass, Integer, Float].freeze
+    end
+
     # Array of user-data fields that should be moved out of the user data to
     # become top-level attributes. A Rails client library would expand this
     # constant to include Rails-specific fields, for example.

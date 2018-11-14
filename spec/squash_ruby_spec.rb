@@ -11,6 +11,8 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
+#
+# Addition to the file Copyright 2018 FluxFederation.com
 
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
@@ -172,7 +174,7 @@ describe Squash::Ruby do
       it "should convert variables to complex value hashes" do
         expect(Squash::Ruby.valueify(/Hello, world!/)).to eql("language"   => "ruby",
                                                               "inspect"    => "/Hello, world!/",
-                                                              "yaml"       => "--- !ruby/regexp /Hello, world!/\n",
+                                                              "yaml"       => "--- !ruby/regexp /Hello, world!/\n...\n",
                                                               "class_name" => "Regexp",
                                                               "json"       => "\"(?-mix:Hello, world!)\"",
                                                               "to_s"       => "(?-mix:Hello, world!)")
